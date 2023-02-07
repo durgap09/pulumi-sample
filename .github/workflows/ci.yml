@@ -28,7 +28,7 @@ jobs:
     - name: Preview Pulumi changes
       run: |
         pulumi login --cloud-url https://api.pulumi.com
-        pulumi stack select <stack-name>
+        pulumi stack select dev
         pulumi preview
 
     - name: Approve changes
