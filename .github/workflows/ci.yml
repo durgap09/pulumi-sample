@@ -3,7 +3,7 @@ name: Deploy Pulumi Preview
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
