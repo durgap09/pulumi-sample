@@ -1,0 +1,36 @@
+name: Deploy Pulumi Preview
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: |
+        npm ci
+
+    - name: Preview Pulumi changes
+      run: |
+        pulumi login --cloud-url https://api.pulumi.com
+        pulumi stack select <stack-name>
+        pulumi preview
+
+    - name: Approve changes
+      run: |
+        pulumi update --yes
