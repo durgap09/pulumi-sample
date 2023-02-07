@@ -39,5 +39,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Pulumi preview
-      run: pulumi preview
+    - name: Preview Pulumi changes
+      run: |
+        pulumi login --cloud-url https://api.pulumi.com
+        pulumi stack select dev
+        pulumi preview
